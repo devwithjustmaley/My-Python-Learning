@@ -9,11 +9,11 @@ while life >= 0:
     if user_num.isdigit():
         user_num = int(user_num)
         if user_num > random_num:
+            life -= 1
             print(f"C'est plus bas ⬇️ attention vous avez {life} chances restants")
-            life -= 1
         elif user_num < random_num:
-            print(f"C'est plus haut ⬆️ attention vous avez {life} chances restants")
             life -= 1
+            print(f"C'est plus haut ⬆️ attention vous avez {life} chances restants")
         else:
             print(f"Bravo vous avez trouvé le bon chiffre c'était bien {random_num}")
             break
