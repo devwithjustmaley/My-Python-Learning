@@ -1,16 +1,16 @@
 empty = " "
 dashboard = [empty for i in range(9)]
 current_player = "X"
-player_choice = 0
 emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"]
 
 def show_dashboard():
     for i in range(9):
-        print(dashboard[i], end=" ")
+        print(dashboard[i] if dashboard[i] != empty else emojis[i], end=" ")
         if i % 3 == 2:
             print("")
 
 while True:
+    player_choice = 0
     show_dashboard()
     try:
         player_choice = int(input(f"Joueur {current_player} "))
@@ -31,6 +31,7 @@ while True:
             or empty != dashboard[2] == dashboard[5] == dashboard[8] \
             or empty != dashboard[2] == dashboard[4] == dashboard[6] \
             or empty != dashboard[0] == dashboard[4] == dashboard[8]:
+                show_dashboard()
                 print(f"Le joueur {current_player} gagne la partie")
                 break
 
