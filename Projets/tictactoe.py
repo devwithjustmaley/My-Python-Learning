@@ -1,3 +1,5 @@
+from tictactoe_robot import get_turn
+
 empty = " "
 dashboard = [empty for i in range(9)]
 current_player = "X"
@@ -17,19 +19,38 @@ print("Bienvenue dans le jeu TicTacToe !")
 print("")
 
 while True:
-    player_choice = 0
     show_dashboard()
+    player_choice = 0
+
+    if current_player == "O":
+        player_choice = get_turn(dashboard) + 1
+
+
     try:
         print("Choisissez la case voulue")
-        player_choice = int(input(f"Joueur {current_player} : "))
+
+        if current_player == "X":
+            player_choice = int(input(f"Joueur {current_player} : "))
+
         if player_choice > 9 or player_choice < 1:
             print("Vous devez choisir une valeur entre 1 et 9 ")
             continue
+
         elif dashboard[player_choice - 1] != empty:
             print("La case choisie est déjà prise ")
             continue
+
         else:
             dashboard[player_choice - 1] = current_player
+            if current_player == "O":
+                print(f"Le bot à jouer à la case {player_choice}")
+            else:
+                print(f"Vous avez jouez à la case {player_choice}")
+
+            if all(cell != empty for cell in dashboard):
+                show_dashboard()
+                print("Match nul !")
+                break
 
             if empty != dashboard[0] == dashboard[1] == dashboard[2] \
             or empty != dashboard[3] == dashboard[4] == dashboard[5] \
@@ -44,7 +65,7 @@ while True:
                 
                 choice = input("Voulez vous une autre partie ? Oui(O) ou Non(N) ")
                 if choice == "O":
-                    dashboard = [empty for i in range(9)]
+                    dashboard = [empty for _ in range(9)]
                     continue
                 elif choice == "N":
                     break
